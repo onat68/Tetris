@@ -74,15 +74,35 @@ const downIsPossible = () => {
     }
     return true
 }
+
+const arrayGeneration = () => {
+    for(let i=0;i<tab.length;i++){
+        if(tab[i]==1){
+            document.body.innerHTML += '<span class="block" id="tab'+i+'"></span>'
+            document.getElementById("tab"+i).innerHTML=tab[i]
+            if((i-((Math.floor(i/10)*10)))==9)
+                document.body.innerHTML += '</br>'
+        }
+        else{
+            document.body.innerHTML += '<span class="rien" id="tab'+i+'"></span>'
+            document.getElementById("tab"+i).innerHTML=tab[i]
+            if((i-((Math.floor(i/10)*10)))==9)
+                document.body.innerHTML += '</br>'
+        }
+        
+    }
+}
     
 
 apparition()
+arrayGeneration()
 const testTimer = () => {
         setTimeout(() => {
             if(downIsPossible()==true){
                 moveDown()
-                console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
-                console.log("------------------------")
+                // console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+                // console.log("------------------------")
+                arrayGeneration()
                 testTimer()
             }
         },"1000")
