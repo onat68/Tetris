@@ -96,25 +96,21 @@ const arrayGeneration = () => {
 
 apparition()
 arrayGeneration()
+
 const testTimer = () => {
         setTimeout(() => {
             if(downIsPossible()==true){
                 moveDown()
-                // console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
                 // console.log("------------------------")
                 arrayGeneration()
                 testTimer()
             }
         },"1000")
 }
-
-
+    
+    
 testTimer()
-
-// apparition()
-// // console.log(whereIsPiece)
+    
+    
+    
 // console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
-
-// moveDown()
-// console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
-
