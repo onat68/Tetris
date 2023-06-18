@@ -60,14 +60,15 @@ const moveDown = () => {
         }
     }
     else{
-        console.log("Mouvement impossible")
+        return false
     }
+    newPlace = []
     
 }
 
 const downIsPossible = () => {
     for(let i = 0;i<whereIsPiece.length;i++){
-        if(tab[newPlace[i]]==1 && whereIsPiece.includes(newPlace[i])==false){
+        if(tab[newPlace[i]]==1 && whereIsPiece.includes(newPlace[i])==false || newPlace[i]>=50){
             return false
         }
     }
@@ -75,15 +76,25 @@ const downIsPossible = () => {
 }
     
 
-
-
-
-
-
 apparition()
-// console.log(whereIsPiece)
-console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+const testTimer = () => {
+        setTimeout(() => {
+            if(downIsPossible()==true){
+                moveDown()
+                console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+                console.log("------------------------")
+                testTimer()
+            }
+        },"1000")
+}
 
-moveDown()
-console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+
+testTimer()
+
+// apparition()
+// // console.log(whereIsPiece)
+// console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+
+// moveDown()
+// console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
 
