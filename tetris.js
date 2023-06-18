@@ -1,5 +1,5 @@
 let tab = []
-tab.length = 50
+tab.length = 100
 for (let i=0;i<tab.length;i++){
     tab[i]=0
 
@@ -68,7 +68,7 @@ const moveDown = () => {
 
 const downIsPossible = () => {
     for(let i = 0;i<whereIsPiece.length;i++){
-        if(tab[newPlace[i]]==1 && whereIsPiece.includes(newPlace[i])==false || newPlace[i]>=50){
+        if(tab[newPlace[i]]==1 && whereIsPiece.includes(newPlace[i])==false || newPlace[i]>=tab.length){
             return false
         }
     }
