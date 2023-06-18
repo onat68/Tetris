@@ -20,9 +20,8 @@ const pieceRandom = () => {
     return pieces[Math.floor(Math.random() * 7)]
 }
 
-// let bloc=pieceRandom()
-let bloc=tetriO
-tab[24]=1
+let bloc=pieceRandom()
+
 
 const apparition = () => {    
     for (let i=0;i<bloc.length;i++){
