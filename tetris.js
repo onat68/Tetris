@@ -21,10 +21,10 @@ const pieceRandom = () => {
     return pieces[Math.floor(Math.random() * 7)]
 }
 
-let bloc=pieceRandom()
 
 
-const apparition = () => {    
+const apparition = () => {
+    let bloc=pieceRandom()
     for (let i=0;i<bloc.length;i++){
         if(bloc[i]==1){
             tab[i+3]=1
@@ -49,22 +49,33 @@ document.onkeyup = function(e) {
 
 }
 
+let newPlaceTemp = []
+let whereIsPieceTemp = []
+let needToBeMoved = false
 
-
-const deplacement = (sens) => {  // sens prendra la valeur -1 pour la gauche et 1 pour la droite
-    for(let y = 0;y<whereIsPiece.length;y++){
-        newPlace.push(whereIsPiece[y]+sens)
-    }
+function moveInTab() {
     for(let y = 0;y<whereIsPiece.length;y++){
         tab[whereIsPiece[y]]=0
     }
-    whereIsPiece = newPlace
+    whereIsPiece = newPlaceTemp
     for(let y = 0;y<whereIsPiece.length;y++){
         tab[whereIsPiece[y]]=1
     }
+
     document.body.innerHTML = ""
     arrayGeneration()
     sens = 0
+    newPlaceTemp = []
+
+    needToBeMoved = false
+
+}
+
+const deplacement = (sens) => {  // sens prendra la valeur -1 pour la gauche et 1 pour la droite
+    for(let y = 0;y<whereIsPiece.length;y++){
+        newPlaceTemp.push(whereIsPiece[y]+sens)
+    }
+    needToBeMoved = true
 }
 
 const moveDown = () => {
@@ -118,11 +129,24 @@ const arrayGeneration = () => {
 apparition()
 arrayGeneration()
 
+
 function gamePlay() {
     if(downIsPossible()==true){
-    document.body.innerHTML = ""
-    moveDown()
-    arrayGeneration()
+        document.body.innerHTML = ""
+        moveDown()
+        arrayGeneration()
+        if(needToBeMoved==true){
+            moveInTab()
+        }
+    }
+    else {
+        whereIsPiece = []
+        apparition()
+        newPlace = []
+        for(let i = 0;i<whereIsPiece.length;i++){
+            newPlace.push(whereIsPiece[i]+10)
+        }
+        // console.log
     }
 }
 
@@ -130,5 +154,3 @@ let testTimer = setInterval(gamePlay,"1000")
     
 
     
-
-
