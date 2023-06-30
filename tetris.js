@@ -1,4 +1,5 @@
 let tab = []
+let sens = 0
 tab.length = 100
 for (let i=0;i<tab.length;i++){
     tab[i]=0
@@ -34,29 +35,36 @@ const apparition = () => {
 
 let newPlace = []
 
-document.onkeyup = function(e) { // sens prendra la valeur -1 pour la gauche et 1 pour la droite
-    
-    // alert(e)
+document.onkeyup = function(e) { 
     
     if (e.keyCode == 37){
         sens = -1
-        alert("gauche")
+        deplacement(sens)
+
     }
     else if (e.keyCode == 39){
         sens = 1
+        deplacement(sens)
     }
 
+}
 
-    for(let i = 0;i<whereIsPiece.length;i++){
-        newPlace.push(whereIsPiece[i]+sens)
+
+
+const deplacement = (sens) => {  // sens prendra la valeur -1 pour la gauche et 1 pour la droite
+    for(let y = 0;y<whereIsPiece.length;y++){
+        newPlace.push(whereIsPiece[y]+sens)
     }
-    for(let i = 0;i<whereIsPiece.length;i++){
-        tab[whereIsPiece[i]]=0
+    for(let y = 0;y<whereIsPiece.length;y++){
+        tab[whereIsPiece[y]]=0
     }
     whereIsPiece = newPlace
-    for(let i = 0;i<whereIsPiece.length;i++){
-        tab[whereIsPiece[i]]=1
+    for(let y = 0;y<whereIsPiece.length;y++){
+        tab[whereIsPiece[y]]=1
     }
+    document.body.innerHTML = ""
+    arrayGeneration()
+    sens = 0
 }
 
 const moveDown = () => {
@@ -110,20 +118,17 @@ const arrayGeneration = () => {
 apparition()
 arrayGeneration()
 
-const testTimer = () => {
-    setTimeout(() => {
-        if(downIsPossible()==true){
-            document.body.innerHTML = ""
-            moveDown()
-            arrayGeneration()
-            testTimer()
-        }
-    },"700")
+function gamePlay() {
+    if(downIsPossible()==true){
+    document.body.innerHTML = ""
+    moveDown()
+    arrayGeneration()
+    }
 }
+
+let testTimer = setInterval(gamePlay,"1000")
     
+
     
-testTimer()
-    
-    
-    
-console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+
+
