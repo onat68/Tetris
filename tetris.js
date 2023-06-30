@@ -33,7 +33,20 @@ const apparition = () => {
 }
 
 let newPlace = []
-const deplacement = (sens) => { // sens prendra la valeur -1 pour la gauche et 1 pour la droite
+
+document.onkeyup = function(e) { // sens prendra la valeur -1 pour la gauche et 1 pour la droite
+    
+    // alert(e)
+    
+    if (e.keyCode == 37){
+        sens = -1
+        alert("gauche")
+    }
+    else if (e.keyCode == 39){
+        sens = 1
+    }
+
+
     for(let i = 0;i<whereIsPiece.length;i++){
         newPlace.push(whereIsPiece[i]+sens)
     }
@@ -82,15 +95,15 @@ const arrayGeneration = () => {
             document.getElementById("tab"+i).innerHTML=tab[i]
             if((i-((Math.floor(i/10)*10)))==9)
                 document.body.innerHTML += '</br>'
-        }
-        else{
-            document.body.innerHTML += '<span class="rien" id="tab'+i+'"></span>'
-            document.getElementById("tab"+i).innerHTML=tab[i]
-            if((i-((Math.floor(i/10)*10)))==9)
+            }
+            else{
+                document.body.innerHTML += '<span class="rien" id="tab'+i+'"></span>'
+                document.getElementById("tab"+i).innerHTML=tab[i]
+                if((i-((Math.floor(i/10)*10)))==9)
                 document.body.innerHTML += '</br>'
+            }
+            
         }
-        
-    }
 }
     
 
@@ -98,14 +111,14 @@ apparition()
 arrayGeneration()
 
 const testTimer = () => {
-        setTimeout(() => {
-            if(downIsPossible()==true){
-                moveDown()
-                // console.log("------------------------")
-                arrayGeneration()
-                testTimer()
-            }
-        },"1000")
+    setTimeout(() => {
+        if(downIsPossible()==true){
+            document.body.innerHTML = ""
+            moveDown()
+            arrayGeneration()
+            testTimer()
+        }
+    },"700")
 }
     
     
@@ -113,4 +126,4 @@ testTimer()
     
     
     
-// console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))
+console.log(tab.slice(0,10)+"\n"+tab.slice(10,20)+"\n"+tab.slice(20,30)+"\n"+tab.slice(30,40)+"\n"+tab.slice(40))

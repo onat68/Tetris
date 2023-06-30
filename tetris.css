@@ -1,4 +1,11 @@
 .block {
     color : blue;
-    background : blue
+    background : blue;
+    border: 1mm ridge rgba(200, 220, 20, .6)
+}
+
+.rien {
+    color : white;
+    background : white;
+    border: 1mm ridge rgba(200, 220, 20, .6)
 }
