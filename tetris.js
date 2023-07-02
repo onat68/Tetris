@@ -1,6 +1,5 @@
-let tab = []
+let tab = Array(100).fill(0)
 let sens = 0
-tab.length = 100
 for (let i=0;i<tab.length;i++){
     tab[i]=0
 
@@ -108,49 +107,47 @@ const downIsPossible = () => {
 }
 
 const arrayGeneration = () => {
-    for(let i=0;i<tab.length;i++){
-        if(tab[i]==1){
-            document.body.innerHTML += '<span class="block" id="tab'+i+'"></span>'
-            document.getElementById("tab"+i).innerHTML=tab[i]
-            if((i-((Math.floor(i/10)*10)))==9)
-                document.body.innerHTML += '</br>'
-            }
-            else{
-                document.body.innerHTML += '<span class="rien" id="tab'+i+'"></span>'
-                document.getElementById("tab"+i).innerHTML=tab[i]
-                if((i-((Math.floor(i/10)*10)))==9)
-                document.body.innerHTML += '</br>'
-            }
-            
-        }
-}
+    let htmlContent = ''
+    for (let i = 0; i < tab.length; i++) {
+      const blockType = tab[i] === 1 ? 'block' : 'rien'
+      const lineBreak = (i - Math.floor(i / 10) * 10) === 9 ? '</br>' : ''
+      htmlContent += `<span class="${blockType}" id="tab${i}">${tab[i]}</span>${lineBreak}`
+    }
+    document.body.innerHTML = htmlContent
+  }
     
 
 apparition()
 arrayGeneration()
 
+let previousTime = 0;
+let interval = 1000;
 
-function gamePlay() {
-    if(downIsPossible()==true){
-        document.body.innerHTML = ""
-        moveDown()
-        arrayGeneration()
-        if(needToBeMoved==true){
-            moveInTab()
-        }
+function gamePlay(currentTime) {
+    if(currentTime - previousTime >= interval){
+        previousTime = currentTime
+        if(downIsPossible()==true){
+            document.body.innerHTML = ""
+            moveDown()
+            arrayGeneration()
+            if(needToBeMoved==true){
+                moveInTab()
+            }
     }
-    else {
-        whereIsPiece = []
-        apparition()
-        newPlace = []
-        for(let i = 0;i<whereIsPiece.length;i++){
-            newPlace.push(whereIsPiece[i]+10)
-        }
-        // console.log
+        else {
+            whereIsPiece = []
+            apparition()
+            newPlace = []
+            for(let i = 0;i<whereIsPiece.length;i++){
+                newPlace.push(whereIsPiece[i]+10)
+            }
+
     }
 }
+requestAnimationFrame(gamePlay)
+}
 
-let testTimer = setInterval(gamePlay,"1000")
+requestAnimationFrame(gamePlay)
     
 
     
